@@ -1,1 +1,1 @@
-Repositorio referente à disciplina de Sisitemas da Informção 1 - Ciência da Computação - UFCG
+Repositorio referente à disciplina de Sistemas da Informação 1 - Ciência da Computação - UFCG
