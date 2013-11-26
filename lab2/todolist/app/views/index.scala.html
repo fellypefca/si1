@@ -3,56 +3,97 @@
 @import helper._
 
 @main("Lista de tarefas") {
-    
-    <h1>@tasks.size() Tarefa(s)</h1>
-    
-    <ul>
-     <h2>Não feitas</h2>
-        @for(task <- tasks) {
-           
-            @if(!task.done){
-                @task.label
-                @task.description
-                @task.priority 
-             
-                @form(routes.Application.change(task.id)) {
-                    <input type="submit" value="Concluir">
-                }
-                
-                @form(routes.Application.deleteTask(task.id)) {
-                    <input type="submit" value="Deletar">
-                }
-            }
-           
-        }
-    </ul>
-    <ul>
-     <h2>Feitas</h2>
-        @for(task <- tasks) {
-           
-            @if(task.done){
-                @task.label
-                @task.description
-                @task.priority 
-             
-                @form(routes.Application.deleteTask(task.id)) {
-                    <input type="submit" value="Deletar">
-                }
-            }
-            
-        }
-    </ul>
-    
-    <h2>Adicionar nova tarefa</h2>
-    
+<h1>Tarefas</h1>
+ <div align="center" style="text-align:left;background-color:#00FF00">
+    <h4 font-size="24px">Adicionar nova tarefa</h4>
     @form(routes.Application.newTask()) {
-        
+         <h4>
         @inputText(taskForm("label"), '_label -> "Nome:")
         @inputText(taskForm("description"), '_label -> "Descrição:") 
         @inputText(taskForm("priority"),'_label ->"Prioridade:") 
-        
+        </h4>
         <input type="submit" value="Criar">
         
     }
+    </div>	
+    <table width="100%">
+    
+    <tr>
+   <td>
+     <h2>Não feitas</h2>
+     <table width="70%" border="2">
+     <tr><td><h3>Nome</h3></td>
+     <td><h3>Descrição</h3></td>
+     <td><h3>Prioridade</h3></td>
+     </tr>
+        @for(task <- tasks) {
+         
+            @if(!task.done){
+             <tr>
+            
+            <td><h3>
+                @task.label
+           </h3></td>
+            <td><h3>
+                @task.description
+            </h3></td>
+            <td><h3>
+                @task.priority 
+             </h3></td>
+             <td>
+                @form(routes.Application.change(task.id)) {
+                    <input type="submit" value="Finalizar">
+                }
+                
+                @form(routes.Application.deleteTask(task.id)) {
+                    <input type="submit" value="Deletar  ">
+                }
+               
+          </td>
+          </tr> 
+            }
+            
+             }
+         </table>
+  </td>
+  <td>
+    <h2>Feitas</h2>
+   <table width="70%"  border="2">
+     <tr><td><h3>Nome</h3></td>
+     <td><h3>Descrição</h3></td>
+     <td><h3>Prioridade</h3></td>
+     </tr>
+        @for(task <- tasks) {
+          
+         
+            @if(task.done){
+             <tr>
+             
+            <td><h3>
+                @task.label
+           </h3></td>
+            <td><h3>
+                @task.description
+            </h3></td>
+            <td><h3>
+                @task.priority 
+             </h3></td>
+             <td>
+                @form(routes.Application.deleteTask(task.id)) {
+                    <input type="submit" value="Deletar">
+                }
+                </td>
+                
+           </tr> 
+            } 
+        
+        }
+        </table>
+        </td>
+    </tr>
+    </table>
+   
+    
+   
     
 }
